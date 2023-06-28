@@ -1,6 +1,8 @@
 package br.com.mylibrary.framework.adapter.out.repository;
 
 import br.com.mylibrary.domain.model.Book;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,11 +18,19 @@ public interface BookRepository extends JpaRepository<Book, UUID> {
 
     Optional<Book> findById(UUID id);
 
-    Page<Book> findByName(String name, Pageable pageable);
-
     Optional<Book> findBookByName(String name);
 
-    Page<Book> findByCategory(String category, Pageable pageable);
+    default Page<Book> findAllByFilters(String name, String author, String category, Pageable pageable) {
+        Book book = new Book();
+        book.setName(name);
+        book.setAuthor(author);
+        book.setCategory(category);
 
-    Page<Book> findByNameAndCategory(String name, String category, Pageable pageable);
+        ExampleMatcher matcher = ExampleMatcher.matching()
+                .withIgnoreCase()
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+
+        Example<Book> example = Example.of(book, matcher);
+        return findAll(example, pageable);
+    }
 }

@@ -1,11 +1,9 @@
 package br.com.mylibrary.framework.adapter.in;
 
 import br.com.mylibrary.application.ports.in.BookUseCase;
-import br.com.mylibrary.application.service.BookService;
-import br.com.mylibrary.domain.dto.BookDto;
-import br.com.mylibrary.domain.dto.PageableDTO;
-import br.com.mylibrary.domain.model.Book;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import br.com.mylibrary.domain.dto.PageableDto;
+import br.com.mylibrary.domain.dto.request.BookRequestDto;
+import br.com.mylibrary.domain.dto.response.BookResponseDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -23,22 +21,22 @@ public class BookController {
     private final BookUseCase bookService;
 
     @PostMapping
-    public ResponseEntity<Book> create(@RequestBody @Valid BookDto request) {
+    public ResponseEntity<BookResponseDto> create(@RequestBody @Valid BookRequestDto request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(bookService.create(request));
     }
 
     @GetMapping
-    public PageableDTO findAll(@RequestParam(required = false) String name, @RequestParam(required = false) String category, Pageable pageable) {
-        return bookService.findAll(name, category, pageable);
+    public PageableDto findAll(@RequestParam(required = false) String name, @RequestParam(required = false) String author, @RequestParam(required = false) String category, Pageable pageable) {
+        return bookService.findAll(name, author, category, pageable);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<BookDto> findById(@PathVariable UUID id) {
+    public ResponseEntity<BookResponseDto> findById(@PathVariable UUID id) {
         return ResponseEntity.status(HttpStatus.OK).body(bookService.findById(id));
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Book> update(@PathVariable UUID id, @RequestBody @Valid BookDto request) {
+    public ResponseEntity<BookResponseDto> update(@PathVariable UUID id, @RequestBody @Valid BookRequestDto request) {
         return ResponseEntity.status(HttpStatus.OK).body(bookService.update(id, request));
     }
 

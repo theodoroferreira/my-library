@@ -1,6 +1,7 @@
 package br.com.mylibrary.domain.dto;
 
-import br.com.mylibrary.domain.model.Book;
+import br.com.mylibrary.domain.dto.response.BorrowingResponseDto;
+import br.com.mylibrary.domain.model.Borrowing;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,10 +13,10 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Builder
-public class PageableDTO {
+public class PageableBorrowingDto {
 
     private Integer numberOfElements;
     private Long totalElements;
     private Integer totalPages;
-    private List<Book> books;
+    private List<BorrowingResponseDto> borrwings;
 }

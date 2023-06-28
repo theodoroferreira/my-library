@@ -1,4 +1,4 @@
-package br.com.mylibrary.framework.mapper;
+package br.com.mylibrary.framework.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

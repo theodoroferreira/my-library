@@ -1,20 +1,17 @@
 package br.com.mylibrary.application.ports.in;
 
-import br.com.mylibrary.domain.dto.BorrowingDto;
-import br.com.mylibrary.domain.dto.PageableDTO;
-import br.com.mylibrary.domain.model.Book;
-import br.com.mylibrary.domain.model.Borrowing;
+import br.com.mylibrary.domain.dto.PageableBorrowingDto;
+import br.com.mylibrary.domain.dto.request.BorrowingRequestDto;
+import br.com.mylibrary.domain.dto.response.BorrowingResponseDto;
 import org.springframework.data.domain.Pageable;
+
+import java.time.LocalDate;
 
 public interface BorrowingUseCase {
 
-    Borrowing create(BorrowingDto request);
+    BorrowingResponseDto create(BorrowingRequestDto request);
 
-    PageableDTO findAll(String userName, Pageable pageable);
+    PageableBorrowingDto findAll(LocalDate borrowingDate, LocalDate returnDate, Pageable pageable);
 
-    Borrowing findById(Long id);
-
-    Borrowing update(Long id, BorrowingDto request);
-
-    void delete(Long id);
+    BorrowingResponseDto findById(Long id);
 }

@@ -1,21 +1,21 @@
 package br.com.mylibrary.application.ports.in;
 
-import br.com.mylibrary.domain.dto.BookDto;
-import br.com.mylibrary.domain.dto.PageableDTO;
-import br.com.mylibrary.domain.model.Book;
+import br.com.mylibrary.domain.dto.PageableDto;
+import br.com.mylibrary.domain.dto.request.BookRequestDto;
+import br.com.mylibrary.domain.dto.response.BookResponseDto;
 import org.springframework.data.domain.Pageable;
 
 import java.util.UUID;
 
 public interface BookUseCase {
 
-    Book create(BookDto request);
+    BookResponseDto create(BookRequestDto request);
 
-    PageableDTO findAll(String name, String category, Pageable pageable);
+    PageableDto findAll(String name, String author, String category, Pageable pageable);
 
-    BookDto findById(UUID id);
+    BookResponseDto findById(UUID id);
 
-    Book update(UUID id, BookDto request);
+    BookResponseDto update(UUID id, BookRequestDto request);
 
     void delete(UUID id);
 }

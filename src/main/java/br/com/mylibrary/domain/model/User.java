@@ -1,11 +1,8 @@
 package br.com.mylibrary.domain.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.*;
-import org.hibernate.validator.constraints.br.CPF;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @Getter
@@ -18,20 +15,18 @@ import java.util.List;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @NotBlank(message = "Campo nome não deve estar em branco.")
-    private String name;
-
-    @NotBlank(message = "Campo sobrenome não deve estar em branco.")
-    private String surname;
-
-    @CPF(message = "CPF inválido")
+    @Column(name = "user_id")
     private String cpf;
 
-    private BigDecimal totalBorrowings;
+    private String name;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    private String surname;
+
+    private String email;
+
+    private Integer totalBorrowings;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Borrowing> borrowings;
+
 }
