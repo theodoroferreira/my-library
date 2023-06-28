@@ -1,6 +1,8 @@
 package br.com.mylibrary.framework.adapter.out.repository;
 
+import br.com.mylibrary.domain.dto.response.BookResponseDto;
 import br.com.mylibrary.domain.model.Book;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;

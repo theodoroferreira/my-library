@@ -76,7 +76,7 @@ public class BorrowingService implements BorrowingUseCase {
             throw new GenericException(HttpStatus.BAD_REQUEST, "Nenhum empréstimo encontrado.");
         }
 
-        List<BorrowingResponseDto> borrowings = List.of(modelMapper.map(page.getContent(), BorrowingResponseDto.class));
+        List<Borrowing> borrowings = page.getContent();
 
         return PageableBorrowingDto
                 .builder()

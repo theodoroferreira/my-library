@@ -1,5 +1,6 @@
 package br.com.mylibrary.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -32,6 +33,7 @@ public class Book {
     private String status;
 
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Borrowing> borrowings;
 
     @OneToMany(cascade = CascadeType.ALL)

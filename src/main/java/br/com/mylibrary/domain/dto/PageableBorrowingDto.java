@@ -18,5 +18,5 @@ public class PageableBorrowingDto {
     private Integer numberOfElements;
     private Long totalElements;
     private Integer totalPages;
-    private List<BorrowingResponseDto> borrwings;
+    private List<Borrowing> borrwings;
 }
